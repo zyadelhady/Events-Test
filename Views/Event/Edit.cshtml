@@ -1,0 +1,33 @@
+﻿@model EventsTest.DTOs.EditEventDto
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+<form class="row gy-2 gx-3 align-items-center" method="post" action="/Event/Edit">
+
+    <div class="col-auto">
+        <label class="visually-hidden" for="autoSizingInput">Id</label>
+        <input class="visually-hidden" required type="text" class="form-control" id="autoSizingInput" placeholder="Id" name="Id" value="@Model.Id">
+    </div>
+    <div class="col-auto">
+        <label class="" for="autoSizingInput">Title</label>
+        <input required type="text" class="form-control" id="autoSizingInput" placeholder="Title" name="Title" value="@Model.Title">
+    </div>
+
+    <div class="col-auto">
+        <label class="" for="autoSizingInput">Description</label>
+        <input type="text" class="form-control" id="autoSizingInput" placeholder="Description" name="Desc" value="@Model.Description">
+    </div>
+
+    <div class="col-auto">
+        <input value="Submit New Event" type="submit" class="btn btn-primary" />  
+    </div>
+</form>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

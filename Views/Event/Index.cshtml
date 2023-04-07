@@ -1,0 +1,100 @@
+﻿@using EventsTest.DTOs;
+@model IList<EventDto>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container">
+
+    <h1 class="mb-5">Upcoming Events</h1>
+    <div class="" style="color:red" asp-validation-summary="All"> </div>
+    <form class="row gy-2 gx-3 align-items-center mb-5" method="post" action="/Event/CreateEvent" enctype="multipart/form-data">
+  <div class="col-auto">
+        <label class="" for="autoSizingInput">Title</label>
+        <input required type="text" class="form-control" id="autoSizingInput" placeholder="Title" name="Title">
+  </div>
+        <div class="col-auto">
+            <label class="" for="autoSizingInput">Start Date</label>
+            <input required type="date" class="form-control" id="autoSizingInput" placeholder="Start Date" name="SDate">
+        </div>
+
+        <div class="col-auto">
+            <label class="" for="autoSizingInput">Start Time</label>
+            <input type="time" class="form-control" id="autoSizingInput" placeholder="Start Time" name="STime" required>
+        </div>
+
+        <div class="col-auto"> 
+            <label class="" for="autoSizingInput">End Date</label>
+            <input type="date" class="form-control" id="autoSizingInput" placeholder="End Date" name="EDate" required>
+
+
+        </div>
+
+
+        <div class="col-auto">
+            <label class="" for="autoSizingInput">End Time</label>
+            <input type="time" class="form-control" id="autoSizingInput" placeholder="End Time" name="ETime" required>
+        </div>
+
+  
+        <div class="col-auto">
+            <label class="" for="autoSizingInput">Description</label>
+            <input type="text" class="form-control" id="autoSizingInput" placeholder="Description" name="Desc">
+        </div>
+
+        <div class ="col-auto">
+            <label for="formFileSm" class="form-label">upload a file</label>
+            <input class="form-control form-control-sm" name="formUpload" id="formFile" type="file">
+        </div>
+  <div class="col-auto">
+            <input value="Submit New Event"  type="submit" class="mt-5 btn btn-primary"/>
+  </div>
+</form>
+
+<form class="row gy-2 gx-3 align-items-center" method="post" action="/Event/FilterEvents">
+        <div class="col-auto">
+            <label class="" for="autoSizingInput">Title</label>
+            <input type="text" class="form-control" id="autoSizingInput" placeholder="Title" name="TitleFilter">
+        </div>
+        <div class="col-auto">
+            <label class="" for="autoSizingInput">Start Date</label>
+            <input type="date" class="form-control" id="autoSizingInput" placeholder="Date" name="DateFilter">
+        </div>
+        <div class="col-auto">
+            <input value="search" type="submit" class="btn btn-primary" />
+        </div>
+</form>
+
+
+    <div class="container text-center mt-5">
+        <div class="row row-cols-4">
+@foreach(var i in Model)
+{
+        <div class="card mb-5" style="width: 18rem; margin-right:1rem;">
+            <div class="card-body">
+                <h5 class="card-title mb-3">@i.Title</h5>
+                <p class="card-text">@i.Description</p>
+                <p><small> @i.Date</small></p>
+                <button class="btn btn-danger mb-2" id="deleteWithId" onclick="location.href='@Url.Action("DeleteEvent", "Event",new {id = @i.Id})'">delete</button>
+                <button type="button" class="btn btn-warning mb-2" onclick="location.href='@Url.Action("EditEvent", "Event",new {Id = @i.Id,Title =i.Title,Desc=@i.Description})'">Edit</button>
+                <button type="button" class="btn btn-outline-info mb-2" onclick="location.href='@Url.Action("RemindEmail", "Event",new {Id = @i.Id})'">email reminder</button>
+                <button type="button" class="btn btn-outline-primary mb-2" onclick="location.href='@Url.Action("RemindNotifications", "Event",new {Id = @i.Id})'">notification reminder</button>
+  
+            </div>
+        </div>
+}
+        </div>
+    </div>
+
+</div> 
+
+
+@section Scripts{
+
+    @{
+
+        <partial name="_ValidationScriptsPartial"/>
+
+    }
+}
